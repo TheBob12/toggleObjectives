@@ -1,0 +1,6 @@
+## Interface: 80000
+## Title: toggleObjectives
+## Notes: Hides the objective frame.... 
+## Author: Obloquy-Turalyon
+## SavedVariables: tObjDB
+HideObjectives.lua
