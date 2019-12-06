@@ -3,9 +3,24 @@ local tObjF = CreateFrame("Frame", "tObjFrame")
 local MSG_PREFIX = "tObj"
 local success = C_ChatInfo.RegisterAddonMessagePrefix(MSG_PREFIX)
 
+local inDungeon = false
+
 tObjFrame:RegisterEvent("CHAT_MSG_ADDON")
 tObjFrame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 tObjFrame:RegisterEvent("ADDON_LOADED")
+tObjFrame:RegisterEvent("CHALLENGE_MODE_START")
+tObjFrame:RegisterEvent("CHALLENGE_MODE_COMPLETED")
+
+function tObjFrame:CHALLENGE_MODE_START(event,...)
+	inDungeon = true
+	toggle()
+end
+function tObjFrame:CHALLENGE_MODE_COMPLETED(event,...)
+	inDungeon = false
+	toggle()
+end
+
+
 
 tObjFrame:SetScript("OnEvent", function(self, event_name, ...)
 	if self[event_name] then
@@ -17,7 +32,14 @@ function toggle()
 	local is = tObjDB.frameVisible
 	
 	if is then 
-		ObjectiveTrackerFrame:Hide() 
+		if not inDungeon then
+			ObjectiveTrackerFrame:Hide() 
+		else 
+			ObjectiveTrackerFrame:Show() 
+			for i = GetNumQuestWatches(), 1, -1 do 
+				RemoveQuestWatch(GetQuestIndexForWatch(i)) 
+			end
+		end
 	else 
 		ObjectiveTrackerFrame:Show() 
 	end
