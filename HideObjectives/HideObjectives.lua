@@ -1,3 +1,6 @@
+
+local tObjF = CreateFrame("Frame", "tObjFrame")
+
 tObjFrame:RegisterEvent("ZONE_CHANGED")
 tObjFrame:RegisterEvent("ZONE_CHANGED_INDOORS")
 tObjFrame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
