@@ -28,8 +28,6 @@ tObjFrame:SetScript("OnEvent", function(self, event_name, ...)
         local isHeader = C_QuestLog.GetTitleForLogIndex(i) == 0 and true or false
         local IsQuestWatched = C_QuestLog.GetQuestWatchType(questID)
 
-        print(IsQuestWatched)
-
         if isHeader then 
             dontHide = ((title) == (currentMapName))
         end
